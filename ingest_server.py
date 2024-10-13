@@ -170,6 +170,8 @@ def main():
         company_facts = cursor.fetchall()
         print("COMPANY FACTS:", company_facts, "\n")
         # Using ThreadPoolExecutor for parallel processing
+        
+        """
         with ThreadPoolExecutor(max_workers=2) as executor:
             for row in company_facts:
                 print("ROW:", row)
@@ -182,18 +184,18 @@ def main():
                     index += 1
                 except Exception as e:
                     print(f"Error processing CIK: {e}")
-
+        """
         # Commit the transaction after each batch
-        conn.commit()
+        # conn.commit()
         print(f"Batch starting at offset {offset} committed.")
 
     # Close the connection
     cursor.close()
     conn.close()
 
-    print("INDEX:", index)
-    print("CIKs:", len(ciks))
-    print("UNIQUE CIKs:", len(set(ciks)))
+    #print("INDEX:", index)
+    #print("CIKs:", len(ciks))
+    #print("UNIQUE CIKs:", len(set(ciks)))
 
 # Execute the main function
 if __name__ == "__main__":
