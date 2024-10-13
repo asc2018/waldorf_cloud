@@ -131,6 +131,7 @@ def insert_values(cursor, cik, json_obj, table_name, target_dictionary):
         logging.error(f"Unexpected error for CIK {cik}: {e}")
 
 def process_cik(cursor, conn, cik_row):
+    print("process_cik:")
     cik, json_obj = cik_row
     table_facts = get_facts_us_gaap_json_obj_values(cursor, cik)
 
@@ -169,6 +170,7 @@ def main():
         # Using ThreadPoolExecutor for parallel processing
         with ThreadPoolExecutor(max_workers=2) as executor:
             for row in company_facts:
+                print("ROW:", row)
                 tasks.append(executor.submit(process_cik, cursor, conn, row))
 
             # Process the results as they complete
