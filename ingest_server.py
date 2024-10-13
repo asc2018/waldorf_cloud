@@ -167,7 +167,7 @@ def main():
         company_facts = cursor.fetchall()
 
         # Using ThreadPoolExecutor for parallel processing
-        with ThreadPoolExecutor(max_workers=10) as executor:
+        with ThreadPoolExecutor(max_workers=2) as executor:
             for row in company_facts:
                 tasks.append(executor.submit(process_cik, cursor, conn, row))
 
