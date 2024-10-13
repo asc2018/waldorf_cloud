@@ -162,6 +162,7 @@ def main():
     tasks = []
 
     for offset in offsets:
+        print("Offset:", offset)
         cursor.execute(f"SELECT cik, company_facts_json FROM edgar_company_facts_json LIMIT {batch_size} OFFSET {offset}")
         company_facts = cursor.fetchall()
 
