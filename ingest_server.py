@@ -154,6 +154,8 @@ def main():
     total_rows = cursor.fetchone()[0]
     offsets = range(0, total_rows, batch_size)
 
+    print("offsets:", offsets)
+
     print("Making Company Facts:")
     
     index = 0
@@ -166,7 +168,7 @@ def main():
         print("Offset:", offset)
         cursor.execute(f"SELECT cik, company_facts_json FROM edgar_company_facts_json LIMIT {batch_size} OFFSET {offset}")
         company_facts = cursor.fetchall()
-
+        print("COMPANY FACTS:", company_facts, "\n")
         # Using ThreadPoolExecutor for parallel processing
         with ThreadPoolExecutor(max_workers=2) as executor:
             for row in company_facts:
