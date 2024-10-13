@@ -149,7 +149,7 @@ def main():
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
 
-    batch_size = 100 # 1000
+    batch_size = 10 # 1000
     cursor.execute("SELECT COUNT(*) FROM edgar_company_facts_json")
     total_rows = cursor.fetchone()[0]
     offsets = range(0, total_rows, batch_size)
